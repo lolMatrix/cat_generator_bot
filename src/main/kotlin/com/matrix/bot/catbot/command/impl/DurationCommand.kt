@@ -18,7 +18,7 @@ class DurationCommand(
         }
         clientService.getClient(commandContext.chatId).apply {
             offsetHours = Integer.parseInt(commandContext.paramsList[0])
-            nextInvocation = LocalDateTime.now().plusMinutes(offsetHours.toLong())
+            nextInvocation = LocalDateTime.now().plusHours(offsetHours.toLong())
         }.also {
             clientService.saveClient(it)
         }

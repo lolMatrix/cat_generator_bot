@@ -25,7 +25,7 @@ class GenerateCatTask(
                 image = catGenerator.generate().inputStream()
             )
             client.apply {
-                nextInvocation = LocalDateTime.now().plusMinutes(client.offsetHours.toLong())
+                nextInvocation = LocalDateTime.now().plusHours(client.offsetHours.toLong())
                 log.info("Следующая генерация кота для клиента $id запланирована на $nextInvocation")
             }.also(clientService::saveClient)
         }

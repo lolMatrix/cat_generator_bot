@@ -2,16 +2,17 @@ package com.matrix.bot.catbot.generator
 
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork
 import org.nd4j.linalg.api.buffer.DataType
+import org.nd4j.linalg.api.ndarray.INDArray
 import org.nd4j.linalg.factory.Nd4j
 import org.nd4j.linalg.indexing.PointIndex
 import org.springframework.stereotype.Component
 
 @Component
 class ModelDecorator(
-    private val model: MultiLayerNetwork
+    private val generatorModel: MultiLayerNetwork,
 ) {
     fun predict(): Array<IntArray> = randomNormal().use {
-        model.output(it).muli(COLOR_MAX_VALUE).castTo(DataType.INT32)
+        generatorModel.output(it).muli(COLOR_MAX_VALUE).castTo(DataType.INT32)
     }.use {
         it[PointIndex(0)].reshape(IMAGE_SHAPE.first * IMAGE_SHAPE.second, COLOR_COUNT).toIntMatrix()
     }

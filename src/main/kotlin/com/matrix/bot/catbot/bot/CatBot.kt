@@ -35,7 +35,9 @@ class CatBot(
                     image,
                     "generated_cat",
                 )
-            )
+            ).apply {
+                caption = "Лови котика :3"
+            }
         )
     }
 
