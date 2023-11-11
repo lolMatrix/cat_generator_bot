@@ -1,0 +1,17 @@
+spring:
+  flyway:
+    enabled: true
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/telegram_cats_db
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: validate
+
+telegram:
+  name: cat_generator_for_all_day_bot
+  token: ${telegram.token}
+
+
