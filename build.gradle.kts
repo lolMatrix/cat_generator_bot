@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.net.URI
 
 val telegramStarterVersion: String by properties
 val nnLibraryVersion: String by properties
@@ -49,6 +48,7 @@ dependencies {
 
     runtimeOnly("org.postgresql:postgresql")
 
+    testImplementation("io.mockk:mockk:1.13.5")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

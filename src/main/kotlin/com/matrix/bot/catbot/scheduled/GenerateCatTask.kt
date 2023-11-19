@@ -6,7 +6,6 @@ import com.matrix.bot.catbot.service.ClientService
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
 
 @Service
 class GenerateCatTask(
@@ -18,16 +17,16 @@ class GenerateCatTask(
 
     @Scheduled(fixedDelay = 1000)
     fun run() {
-        clientService.getClosestClients().forEach { client ->
+        clientService.getScheduledClients().forEach { client ->
             log.info("Генерация кота для запланированного задания клиента ${client.id}")
             catBot.sendImage(
                 clientId = client.id,
                 image = catGenerator.generate().inputStream()
             )
-            client.apply {
-                nextInvocation = LocalDateTime.now().plusHours(client.offsetHours.toLong())
-                log.info("Следующая генерация кота для клиента $id запланирована на $nextInvocation")
-            }.also(clientService::saveClient)
+            client.shiftNextInvocation().also {
+                clientService.saveClient(it)
+                log.info("Следующая генерация кота для клиента ${it.id} запланирована на ${it.nextInvocation}")
+            }
         }
     }
 }

@@ -6,5 +6,5 @@ interface ClientService {
     fun saveClient(client: Client)
     fun getClient(id: Long): Client
     fun existById(id: Long): Boolean
-    fun getClosestClients(): List<Client>
+    fun getScheduledClients(): List<Client>
 }

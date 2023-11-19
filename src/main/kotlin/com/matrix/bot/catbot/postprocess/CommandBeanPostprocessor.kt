@@ -10,19 +10,18 @@ import org.springframework.stereotype.Component
 @Component
 class CommandBeanPostprocessor : BeanPostProcessor {
     override fun postProcessAfterInitialization(bean: Any, beanName: String): Any = when (bean) {
-        is Command -> {
-            val commandNameAnnotation = bean::class.annotations
-                .filterIsInstance(CommandName::class.java)
-                .first()
-            CommandProxy(
-                command = bean,
-                commandName = commandNameAnnotation.name
-            )
-        }
-
+        is Command -> bean::class.annotations
+            .filterIsInstance(CommandName::class.java)
+            .first().let {
+                CommandProxy(
+                    command = bean,
+                    commandName = it.name
+                )
+            }
         else -> bean
     }
 
     @Bean
-    fun registerList(commands: List<Command>): List<CommandProxy> = commands.filterIsInstance(CommandProxy::class.java)
+    fun commandProxies(commands: List<Command>): List<CommandProxy> =
+        commands.filterIsInstance(CommandProxy::class.java)
 }
