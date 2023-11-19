@@ -8,17 +8,19 @@ val hdf5Version: String by properties
 val leptonicaVersion: String by properties
 val ffmpegVersion: String by properties
 
+val gitVersion: groovy.lang.Closure<String> by extra
+
 plugins {
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.3"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
     kotlin("plugin.jpa") version "1.8.22"
+    id("com.palantir.git-version") version "3.0.0"
 }
 
-
 group = "com.matrix.bot"
-version = "0.0.1-SNAPSHOT"
+version = gitVersion()
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
