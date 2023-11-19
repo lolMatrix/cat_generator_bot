@@ -6,5 +6,5 @@ import org.springframework.stereotype.Component
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
 annotation class CommandName(
-    val name: String = "/default"
+    val name: String
 )

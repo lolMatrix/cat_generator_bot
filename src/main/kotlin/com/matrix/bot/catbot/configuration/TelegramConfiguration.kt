@@ -8,10 +8,8 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession
 
 @Configuration
 class TelegramConfiguration {
-
     @Bean
     fun telegramBotsApi(catBot: CatBot) = TelegramBotsApi(DefaultBotSession::class.java).apply {
         registerBot(catBot)
     }
-
 }

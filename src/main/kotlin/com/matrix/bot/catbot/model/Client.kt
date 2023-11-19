@@ -9,6 +9,10 @@ data class Client(
     @Id
     val id: Long,
     val name: String,
-    var offsetHours: Int = 2,
-    var nextInvocation: LocalDateTime = LocalDateTime.now(),
-)
+    val offsetHours: Int = 2,
+    val nextInvocation: LocalDateTime = LocalDateTime.now(),
+) {
+    fun shiftNextInvocation() = copy(nextInvocation = LocalDateTime.now().plusHours(offsetHours.toLong()))
+    fun nextInvocationNow() = copy(nextInvocation = LocalDateTime.now())
+    fun setOffsetHours(offsetHours: Int) = copy(offsetHours = offsetHours)
+}

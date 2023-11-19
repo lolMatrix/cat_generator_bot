@@ -12,10 +12,7 @@ class ClientServiceImpl(
     override fun saveClient(client: Client) {
         clientRepository.save(client)
     }
-
     override fun getClient(id: Long) = clientRepository.getReferenceById(id)
-
     override fun existById(id: Long) = clientRepository.existsById(id)
-
-    override fun getClosestClients(): List<Client> = clientRepository.getClosestClients()
+    override fun getScheduledClients(): List<Client> = clientRepository.getScheduledClients()
 }
