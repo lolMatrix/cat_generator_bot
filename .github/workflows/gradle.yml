@@ -35,4 +35,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: catbot
-        path: "build/libs/catbot-${GITHUB_REF#refs/*/}.jar"
+        path: "build/libs/catbot-${{  github.ref_name }}.jar"
